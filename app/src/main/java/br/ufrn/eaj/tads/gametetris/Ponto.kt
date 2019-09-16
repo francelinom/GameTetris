@@ -7,7 +7,7 @@ class Ponto(var x:Int,var y:Int) {
     }
 
     fun moverEsquerda(){
-        y++
+        y--
     }
 
     fun moverDireita(){
