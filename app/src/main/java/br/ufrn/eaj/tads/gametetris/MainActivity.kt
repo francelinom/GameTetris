@@ -10,8 +10,7 @@ import androidx.core.app.ComponentActivity
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
-
+import kotlin.math.log
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,11 +22,13 @@ class MainActivity : AppCompatActivity() {
 
     var pt = Ponto(0,15)
 
-    inner class Ponto(var x:Int,var y:Int){
+   /* inner class Ponto(var x:Int,var y:Int){
         fun moveDown(){
             x++
         }
     }
+
+    */
 
 
     //val board = Array(LINHA, { IntArray(COLUNA) })
@@ -56,8 +57,35 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
+
+        pt.moverBaixo()
+        Log.i("TESTE", "")
+
+       /* try {
+            boardView{pt.}
+        }catch ()
+
+        */
+
+
+        buttonEsquerda.setOnClickListener {
+            pt.moverEsquerda()
+        }
+
+        buttonDireita.setOnClickListener {
+            pt.moverDireita()
+        }
+
+        buttonGirar.setOnClickListener {
+            pt.moverBaixo()
+        }
+
+
+
         gameRun()
     }
+
 
     fun gameRun(){
         Thread{
@@ -71,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     //move peça atual
-                    pt.moveDown()
+                    pt.moverBaixo()
                     //print peça
                     try {
                         boardView[pt.x][pt.y]!!.setImageResource(R.drawable.white)
