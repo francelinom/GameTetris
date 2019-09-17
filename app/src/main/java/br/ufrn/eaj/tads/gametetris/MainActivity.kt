@@ -2,15 +2,9 @@ package br.ufrn.eaj.tads.gametetris
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import android.view.LayoutInflater
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import kotlin.math.log
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     var running = true
     var speed:Long = 300
 
-    var pt = L(2,15)
+    var pt = N(2,15)
 
    /*inner class Ponto(var x:Int,var y:Int){
         fun moveDown(){
@@ -134,7 +128,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun novaPeca(){
-        pt = L(0,15)
+        pt = N(0,15)
     }
 
 
