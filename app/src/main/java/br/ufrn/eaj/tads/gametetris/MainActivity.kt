@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     var running = true
     var speed:Long = 300
 
-    var pt = L(0,15)
+    var pt = L(2,15)
 
    /*inner class Ponto(var x:Int,var y:Int){
         fun moveDown(){
@@ -101,7 +101,10 @@ class MainActivity : AppCompatActivity() {
                     pt.moverBaixo()
                     //print peça
                     try {
-                        boardView[pt.x][pt.y]!!.setImageResource(R.drawable.white)
+                        boardView[pt.pontoA.x][pt.pontoA.y]!!.setImageResource(R.drawable.white)
+                        boardView[pt.pontoB.x][pt.pontoB.y]!!.setImageResource(R.drawable.white)
+                        boardView[pt.pontoC.x][pt.pontoC.y]!!.setImageResource(R.drawable.white)
+                        boardView[pt.pontoD.x][pt.pontoD.y]!!.setImageResource(R.drawable.white)
                     }catch (e:ArrayIndexOutOfBoundsException ) {
                         //se a peça passou das bordas eu vou parar o jogo
                         running = false
