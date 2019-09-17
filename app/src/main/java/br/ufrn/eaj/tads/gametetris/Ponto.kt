@@ -11,6 +11,10 @@ class Ponto(var x:Int,var y:Int) {
     }
 
     fun moverDireita(){
-        y--
+        y++
+    }
+
+    fun moverCima(){
+        x--
     }
 }

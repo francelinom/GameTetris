@@ -15,7 +15,7 @@ class L(x:Int, y:Int) : Piece(x, y) {
         pontoD.moverBaixo()
     }
 
-    override fun moversquerda() {
+    override fun moverEsquerda() {
         pontoA.moverEsquerda()
         pontoB.moverEsquerda()
         pontoC.moverEsquerda()
@@ -27,6 +27,13 @@ class L(x:Int, y:Int) : Piece(x, y) {
         pontoB.moverDireita()
         pontoC.moverDireita()
         pontoD.moverDireita()
+    }
+
+    fun moverCima(){
+        pontoA.moverCima()
+        pontoB.moverCima()
+        pontoC.moverCima()
+        pontoD.moverCima()
     }
 
     override fun girar() {

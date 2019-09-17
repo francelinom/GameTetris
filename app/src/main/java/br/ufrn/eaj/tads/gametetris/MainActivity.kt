@@ -20,18 +20,14 @@ class MainActivity : AppCompatActivity() {
     var running = true
     var speed:Long = 300
 
-    var pt = Ponto(0,15)
+    var pt = L(0,15)
 
-   /* inner class Ponto(var x:Int,var y:Int){
+   /*inner class Ponto(var x:Int,var y:Int){
         fun moveDown(){
             x++
         }
-    }
+    }*/
 
-    */
-
-
-    //val board = Array(LINHA, { IntArray(COLUNA) })
 
     var board = Array(LINHA) {
         Array(COLUNA){0}
@@ -59,16 +55,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        pt.moverBaixo()
-        Log.i("TESTE", "")
-
-       /* try {
-            boardView{pt.}
-        }catch ()
-
-        */
-
-
         buttonEsquerda.setOnClickListener {
             pt.moverEsquerda()
         }
@@ -77,8 +63,21 @@ class MainActivity : AppCompatActivity() {
             pt.moverDireita()
         }
 
-        buttonGirar.setOnClickListener {
+        /*buttonGirar.setOnClickListener {
             pt.moverBaixo()
+        }*/
+
+        buttonDescer.setOnClickListener {
+            pt.moverBaixo()
+        }
+
+        try {
+            boardView[pt.pontoA.x][pt.pontoA.y]!!.setImageResource(R.drawable.white)
+            boardView[pt.pontoB.x][pt.pontoB.y]!!.setImageResource(R.drawable.white)
+            boardView[pt.pontoC.x][pt.pontoC.y]!!.setImageResource(R.drawable.white)
+            boardView[pt.pontoD.x][pt.pontoD.y]!!.setImageResource(R.drawable.white)
+        }catch (e:ArrayIndexOutOfBoundsException){
+            running = false
         }
 
 
@@ -112,4 +111,32 @@ class MainActivity : AppCompatActivity() {
             }
         }.start()
     }
+
+    fun atualizarPeca(){
+        board[pt.pontoA.x][pt.pontoA.y] = 1
+        board[pt.pontoB.x][pt.pontoB.y] = 1
+        board[pt.pontoC.x][pt.pontoC.y] = 1
+        board[pt.pontoD.x][pt.pontoD.y] = 1
+
+        ConstruirPeca()
+        novaPeca()
+
+    }
+
+    fun ConstruirPeca(){
+        boardView[pt.pontoA.x][pt.pontoA.y]!!.setImageResource(R.drawable.white)
+        boardView[pt.pontoB.x][pt.pontoB.y]!!.setImageResource(R.drawable.white)
+        boardView[pt.pontoC.x][pt.pontoC.y]!!.setImageResource(R.drawable.white)
+        boardView[pt.pontoD.x][pt.pontoD.y]!!.setImageResource(R.drawable.white)
+    }
+
+    fun novaPeca(){
+        pt = L(0,15)
+    }
+
+
+
+
+
+
 }
