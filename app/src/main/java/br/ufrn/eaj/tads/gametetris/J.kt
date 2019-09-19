@@ -1,12 +1,11 @@
 package br.ufrn.eaj.tads.gametetris
 
-class T (x:Int, y:Int) : Piece(x, y){
+class J (x:Int, y:Int) : Piece(x, y) {
 
     init {
-        pontoB = Ponto(x, y-1)
-        pontoC = Ponto(x, y+1)
-        pontoD = Ponto(x-1, y)
-
+        pontoB = Ponto(x-1, y)
+        pontoC = Ponto(x-2, y)
+        pontoD = Ponto(x, y-1)
     }
 
     override fun moverBaixo(){
@@ -41,10 +40,10 @@ class T (x:Int, y:Int) : Piece(x, y){
         pontoB.x += 1
         pontoB.y += 1
 
-        pontoC.x -= 1
-        pontoC.y += 1
+        pontoC.x += 2
+        pontoC.y += 2
 
-        pontoD.x += 1
+        pontoD.x -= 1
         pontoD.y += 1
     }
 }

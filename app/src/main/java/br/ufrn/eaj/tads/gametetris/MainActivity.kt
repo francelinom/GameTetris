@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     var running = true
     var speed:Long = 300
 
-    var pt = N(2,15)
+    var pt = T(3,15)
 
    /*inner class Ponto(var x:Int,var y:Int){
         fun moveDown(){
@@ -57,9 +57,9 @@ class MainActivity : AppCompatActivity() {
             pt.moverDireita()
         }
 
-        /*buttonGirar.setOnClickListener {
-            pt.moverBaixo()
-        }*/
+        buttonGirar.setOnClickListener {
+            pt.girar()
+        }
 
         buttonDescer.setOnClickListener {
             pt.moverBaixo()
@@ -88,52 +88,63 @@ class MainActivity : AppCompatActivity() {
                     //limpa tela
                     for (i in 0 until LINHA) {
                         for (j in 0 until COLUNA) {
-                            boardView[i][j]!!.setImageResource(R.drawable.black)
+
+                            if(board[i][j] == 0){
+                                boardView[i][j]!!.setImageResource(R.drawable.black)
+                            }
                         }
                     }
                     //move peça atual
-                    pt.moverBaixo()
-                    //print peça
+                    //pt.moverBaixo()
                     try {
-                        boardView[pt.pontoA.x][pt.pontoA.y]!!.setImageResource(R.drawable.white)
-                        boardView[pt.pontoB.x][pt.pontoB.y]!!.setImageResource(R.drawable.white)
-                        boardView[pt.pontoC.x][pt.pontoC.y]!!.setImageResource(R.drawable.white)
-                        boardView[pt.pontoD.x][pt.pontoD.y]!!.setImageResource(R.drawable.white)
+                        ConstruirPeca()
+                        if (pt.pontoA.x + 1 < LINHA || pt.pontoB.x + 1 < LINHA || pt.pontoC.x + 1 < LINHA || pt.pontoD.x + 1 < LINHA) {
+                            pt.moverBaixo()
+                        } else {
+
+                            atualizarPeca()
+
+                        }
+
                     }catch (e:ArrayIndexOutOfBoundsException ) {
                         //se a peça passou das bordas eu vou parar o jogo
-                        running = false
+                        //running = false
+                        println(e.message)
                     }
+
 
                 }
             }
         }.start()
     }
 
-    fun atualizarPeca(){
-        board[pt.pontoA.x][pt.pontoA.y] = 1
-        board[pt.pontoB.x][pt.pontoB.y] = 1
-        board[pt.pontoC.x][pt.pontoC.y] = 1
-        board[pt.pontoD.x][pt.pontoD.y] = 1
 
-        ConstruirPeca()
+
+    fun atualizarPeca(){
+        board[pt.pontoA.x - 1][pt.pontoA.y] = 1
+        board[pt.pontoB.x - 1][pt.pontoB.y] = 1
+        board[pt.pontoC.x - 1][pt.pontoC.y] = 1
+        board[pt.pontoD.x - 1][pt.pontoD.y] = 1
+
         novaPeca()
+        ConstruirPeca()
+
 
     }
 
     fun ConstruirPeca(){
+
         boardView[pt.pontoA.x][pt.pontoA.y]!!.setImageResource(R.drawable.white)
         boardView[pt.pontoB.x][pt.pontoB.y]!!.setImageResource(R.drawable.white)
         boardView[pt.pontoC.x][pt.pontoC.y]!!.setImageResource(R.drawable.white)
         boardView[pt.pontoD.x][pt.pontoD.y]!!.setImageResource(R.drawable.white)
+
     }
 
     fun novaPeca(){
-        pt = N(0,15)
+        pt = T(3,15)
+
     }
-
-
-
-
 
 
 }

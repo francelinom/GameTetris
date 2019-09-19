@@ -44,7 +44,7 @@ class I(x:Int, y:Int) : Piece(x, y) {
         pontoC.x += 2
         pontoC.y += 2
 
-        pontoD.x += 1
-        pontoD.y -= 1
+        pontoD.x += 3
+        pontoD.y += 3
     }
 }
