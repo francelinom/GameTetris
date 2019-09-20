@@ -38,13 +38,6 @@ class O (x:Int, y:Int) : Piece(x, y){
     }
 
     override fun girar() {
-        pontoB.x += 1
-        pontoB.y += 1
 
-        pontoC.x += 2
-        pontoC.y += 2
-
-        pontoD.x += 1
-        pontoD.y -= 1
     }
 }

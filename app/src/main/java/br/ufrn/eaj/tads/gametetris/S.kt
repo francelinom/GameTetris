@@ -1,15 +1,15 @@
 package br.ufrn.eaj.tads.gametetris
 
-class N(x: Int, y: Int) : Piece(x, y) {
+class S (x:Int, y:Int) : Piece(x, y){
 
     init {
-        pontoB = Ponto(x - 1, y + 1)
-        pontoC = Ponto(x, y + 1)
-        pontoD = Ponto(x + 1, y)
+        pontoB = Ponto(x-1, y)
+        pontoC = Ponto(x, y-1)
+        pontoD = Ponto(x-1, y+1)
 
     }
 
-    override fun moverBaixo() {
+    override fun moverBaixo(){
         pontoA.moverBaixo()
         pontoB.moverBaixo()
         pontoC.moverBaixo()
@@ -30,7 +30,7 @@ class N(x: Int, y: Int) : Piece(x, y) {
         pontoD.moverDireita()
     }
 
-    fun moverCima() {
+    fun moverCima(){
         pontoA.moverCima()
         pontoB.moverCima()
         pontoC.moverCima()
@@ -38,15 +38,13 @@ class N(x: Int, y: Int) : Piece(x, y) {
     }
 
     override fun girar() {
+        pontoB.x += 1
+        pontoB.y += 1
 
-        pontoB.x += 2
-        pontoB.y += 0
+        pontoC.x -= 1
+        pontoC.y += 1
 
-        pontoC.x += 1
-        pontoC.y -= 1
-
-        pontoD.x -= 1
-        pontoD.y -= 1
-
+        pontoD.x += 2
+        pontoD.y += 0
     }
 }

@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     var running = true
     var speed:Long = 300
 
-    var pt = T(3,15)
+    var pt = N(3,15)
 
    /*inner class Ponto(var x:Int,var y:Int){
         fun moveDown(){
@@ -142,7 +142,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun novaPeca(){
-        pt = T(3,15)
+        pt = N(3,15)
 
     }
 
