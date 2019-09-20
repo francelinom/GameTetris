@@ -6,6 +6,8 @@ import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import android.view.LayoutInflater
 import br.ufrn.eaj.tads.gametetris.letras.*
+import kotlin.random.Random
+import kotlin.random.nextInt
 
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     var running = true
     var speed: Long = 300
 
-    var pt = T(3, 15)
+    var pt: Piece = T(3, 15)
 
     var board = Array(LINHA) {
         Array(COLUNA) { 0 }
@@ -32,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         gridboard.rowCount = LINHA
         gridboard.columnCount = COLUNA
 
+        pecasVariadas()
+
         val inflater = LayoutInflater.from(this)
 
         for (i in 0 until LINHA) {
@@ -41,7 +45,6 @@ class MainActivity : AppCompatActivity() {
                 gridboard.addView(boardView[i][j])
             }
         }
-
 
 
         buttonEsquerda.setOnClickListener {
@@ -69,12 +72,12 @@ class MainActivity : AppCompatActivity() {
             running = false
         }
 
-
         gameRun()
     }
 
 
     fun gameRun() {
+
         Thread {
             while (running) {
                 Thread.sleep(speed)
@@ -89,7 +92,6 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     //move peça atual
-                    //pt.moverBaixo()
                     try {
                         ConstruirPeca()
                         if (pt.pontoA.x + 1 < LINHA || pt.pontoB.x + 1 < LINHA || pt.pontoC.x + 1 < LINHA || pt.pontoD.x + 1 < LINHA) {
@@ -105,8 +107,6 @@ class MainActivity : AppCompatActivity() {
                         //running = false
                         println(e.message)
                     }
-
-
                 }
             }
         }.start()
@@ -136,6 +136,35 @@ class MainActivity : AppCompatActivity() {
     fun novaPeca() {
         pt = T(3, 15)
 
+    }
+
+    fun pecasVariadas() {
+
+        var todasPecas = Random.nextInt(0, 6)
+
+        when (todasPecas) {
+            0 -> {
+                pt = L(3, 15)
+            }
+            1 -> {
+                pt = I(3, 15)
+            }
+            2 -> {
+                pt = J(3, 15)
+            }
+            3 -> {
+                pt = N(3, 15)
+            }
+            4 -> {
+                pt = O(3, 15)
+            }
+            5 -> {
+                pt = S(3, 15)
+            }
+            else -> {
+                pt = T(3, 15)
+            }
+        }
     }
 
 
