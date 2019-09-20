@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import android.view.LayoutInflater
+import br.ufrn.eaj.tads.gametetris.letras.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -12,22 +13,15 @@ class MainActivity : AppCompatActivity() {
     val LINHA = 36
     val COLUNA = 26
     var running = true
-    var speed:Long = 300
+    var speed: Long = 300
 
-    var pt = N(3,15)
-
-   /*inner class Ponto(var x:Int,var y:Int){
-        fun moveDown(){
-            x++
-        }
-    }*/
-
+    var pt = T(3, 15)
 
     var board = Array(LINHA) {
-        Array(COLUNA){0}
+        Array(COLUNA) { 0 }
     }
 
-    var boardView = Array(LINHA){
+    var boardView = Array(LINHA) {
         arrayOfNulls<ImageView>(COLUNA)
     }
 
@@ -42,8 +36,9 @@ class MainActivity : AppCompatActivity() {
 
         for (i in 0 until LINHA) {
             for (j in 0 until COLUNA) {
-                boardView[i][j] = inflater.inflate(R.layout.inflate_image_view, gridboard, false) as ImageView
-                gridboard.addView( boardView[i][j])
+                boardView[i][j] =
+                    inflater.inflate(R.layout.inflate_image_view, gridboard, false) as ImageView
+                gridboard.addView(boardView[i][j])
             }
         }
 
@@ -70,26 +65,25 @@ class MainActivity : AppCompatActivity() {
             boardView[pt.pontoB.x][pt.pontoB.y]!!.setImageResource(R.drawable.white)
             boardView[pt.pontoC.x][pt.pontoC.y]!!.setImageResource(R.drawable.white)
             boardView[pt.pontoD.x][pt.pontoD.y]!!.setImageResource(R.drawable.white)
-        }catch (e:ArrayIndexOutOfBoundsException){
+        } catch (e: ArrayIndexOutOfBoundsException) {
             running = false
         }
-
 
 
         gameRun()
     }
 
 
-    fun gameRun(){
-        Thread{
-            while(running){
+    fun gameRun() {
+        Thread {
+            while (running) {
                 Thread.sleep(speed)
-                runOnUiThread{
+                runOnUiThread {
                     //limpa tela
                     for (i in 0 until LINHA) {
                         for (j in 0 until COLUNA) {
 
-                            if(board[i][j] == 0){
+                            if (board[i][j] == 0) {
                                 boardView[i][j]!!.setImageResource(R.drawable.black)
                             }
                         }
@@ -106,7 +100,7 @@ class MainActivity : AppCompatActivity() {
 
                         }
 
-                    }catch (e:ArrayIndexOutOfBoundsException ) {
+                    } catch (e: ArrayIndexOutOfBoundsException) {
                         //se a peça passou das bordas eu vou parar o jogo
                         //running = false
                         println(e.message)
@@ -119,8 +113,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-    fun atualizarPeca(){
+    fun atualizarPeca() {
         board[pt.pontoA.x - 1][pt.pontoA.y] = 1
         board[pt.pontoB.x - 1][pt.pontoB.y] = 1
         board[pt.pontoC.x - 1][pt.pontoC.y] = 1
@@ -129,10 +122,9 @@ class MainActivity : AppCompatActivity() {
         novaPeca()
         ConstruirPeca()
 
-
     }
 
-    fun ConstruirPeca(){
+    fun ConstruirPeca() {
 
         boardView[pt.pontoA.x][pt.pontoA.y]!!.setImageResource(R.drawable.white)
         boardView[pt.pontoB.x][pt.pontoB.y]!!.setImageResource(R.drawable.white)
@@ -141,8 +133,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun novaPeca(){
-        pt = N(3,15)
+    fun novaPeca() {
+        pt = T(3, 15)
 
     }
 

@@ -1,11 +1,16 @@
-package br.ufrn.eaj.tads.gametetris
+package br.ufrn.eaj.tads.gametetris.letras
+
+import br.ufrn.eaj.tads.gametetris.Piece
+import br.ufrn.eaj.tads.gametetris.Ponto
 
 class J (x:Int, y:Int) : Piece(x, y) {
 
+    var girar = 0
+
     init {
-        pontoB = Ponto(x-1, y)
-        pontoC = Ponto(x-2, y)
-        pontoD = Ponto(x, y-1)
+        pontoB = Ponto(x - 1, y)
+        pontoC = Ponto(x - 2, y)
+        pontoD = Ponto(x, y - 1)
     }
 
     override fun moverBaixo(){
@@ -37,13 +42,31 @@ class J (x:Int, y:Int) : Piece(x, y) {
     }
 
     override fun girar() {
-        pontoB.x += 1
-        pontoB.y += 1
 
-        pontoC.x += 2
-        pontoC.y += 2
+        if (girar == 0){
+            pontoB.x += 1
+            pontoB.y += 1
 
-        pontoD.x -= 1
-        pontoD.y += 1
+            pontoC.x += 2
+            pontoC.y += 2
+
+            pontoD.x -= 1
+            pontoD.y += 1
+
+            girar = 1
+
+        }else{
+            pontoB.x -= 1
+            pontoB.y -= 1
+
+            pontoC.x -= 2
+            pontoC.y -= 2
+
+            pontoD.x += 1
+            pontoD.y -= 1
+
+            girar = 0
+        }
+
     }
 }

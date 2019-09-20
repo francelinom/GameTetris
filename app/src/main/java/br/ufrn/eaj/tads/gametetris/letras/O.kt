@@ -1,11 +1,14 @@
-package br.ufrn.eaj.tads.gametetris
+package br.ufrn.eaj.tads.gametetris.letras
 
-class S (x:Int, y:Int) : Piece(x, y){
+import br.ufrn.eaj.tads.gametetris.Piece
+import br.ufrn.eaj.tads.gametetris.Ponto
+
+class O (x:Int, y:Int) : Piece(x, y){
 
     init {
-        pontoB = Ponto(x-1, y)
-        pontoC = Ponto(x, y-1)
-        pontoD = Ponto(x-1, y+1)
+        pontoB = Ponto(x, y + 1)
+        pontoC = Ponto(x + 1, y + 1)
+        pontoD = Ponto(x + 1, y)
 
     }
 
@@ -38,13 +41,6 @@ class S (x:Int, y:Int) : Piece(x, y){
     }
 
     override fun girar() {
-        pontoB.x += 1
-        pontoB.y += 1
 
-        pontoC.x -= 1
-        pontoC.y += 1
-
-        pontoD.x += 2
-        pontoD.y += 0
     }
 }
