@@ -16,8 +16,9 @@ class MainActivity : AppCompatActivity() {
     val COLUNA = 26
     var running = true
     var speed: Long = 300
+    var pontos = 0
 
-    var pt: Piece = T(3, 15)
+    var pt: Piece = pecasVariadas() //T(3, 15)
 
     var board = Array(LINHA) {
         Array(COLUNA) { 0 }
@@ -34,8 +35,6 @@ class MainActivity : AppCompatActivity() {
         gridboard.rowCount = LINHA
         gridboard.columnCount = COLUNA
 
-        pecasVariadas()
-
         val inflater = LayoutInflater.from(this)
 
         for (i in 0 until LINHA) {
@@ -48,19 +47,25 @@ class MainActivity : AppCompatActivity() {
 
 
         buttonEsquerda.setOnClickListener {
-            pt.moverEsquerda()
+            if (colisaoEsquerda()) {
+                pt.moverEsquerda()
+            }
         }
 
         buttonDireita.setOnClickListener {
-            pt.moverDireita()
+            if (colisaoDireita()) {
+                pt.moverDireita()
+            }
         }
 
         buttonGirar.setOnClickListener {
-            pt.girar()
+                pt.girar()
         }
 
         buttonDescer.setOnClickListener {
-            pt.moverBaixo()
+            if (colisaoFundo()) {
+                pt.moverBaixo()
+            }
         }
 
         try {
@@ -86,27 +91,76 @@ class MainActivity : AppCompatActivity() {
                     for (i in 0 until LINHA) {
                         for (j in 0 until COLUNA) {
 
-                            if (board[i][j] == 0) {
-                                boardView[i][j]!!.setImageResource(R.drawable.black)
+                            when (board[i][j]) {
+                                0 -> {
+                                    boardView[i][j]!!.setImageResource(R.drawable.black)
+                                }
+                                1 -> {
+                                    boardView[i][j]!!.setImageResource(R.drawable.white)
+                                }
                             }
+                            /*if (board[i][j] == 0) {
+                                boardView[i][j]!!.setImageResource(R.drawable.black)
+                            }*/
                         }
                     }
-                    //move peça atual
-                    try {
-                        ConstruirPeca()
-                        if (pt.pontoA.x + 1 < LINHA || pt.pontoB.x + 1 < LINHA || pt.pontoC.x + 1 < LINHA || pt.pontoD.x + 1 < LINHA) {
-                            pt.moverBaixo()
-                        } else {
 
-                            atualizarPeca()
+                    //move peça atual
+
+                    if (colisaoFundo()) {
+                        pt.moverBaixo()
+                        ConstruirPeca()
+                    } else {
+                        ConstruirPeca()
+                        board[pt.pontoA.x][pt.pontoA.y] = 1
+                        board[pt.pontoB.x][pt.pontoB.y] = 1
+                        board[pt.pontoC.x][pt.pontoC.y] = 1
+                        board[pt.pontoD.x][pt.pontoD.y] = 1
+                        pt = pecasVariadas()
+                    }
+
+                    for (i in 0 until LINHA) {
+                        var cont = 0
+                        for (j in 0 until COLUNA) {
+                            if (board[i][j] == 0)
+                                break
+                            else {
+                                cont++
+                                if (cont === 20) {
+                                    destruir(i)
+                                }
+                            }
 
                         }
+                    }
+
+                    /*
+
+
+                    if (pt.pontoA.x <= LINHA && pt.pontoB.x + 0 <= LINHA && pt.pontoC.x <= LINHA && pt.pontoD.x <= LINHA) {
+                        if (board[pt.pontoA.x + 1][pt.pontoA.y] == 0 &&
+                            board[pt.pontoB.x + 1][pt.pontoB.y] == 0 &&
+                            board[pt.pontoC.x + 1][pt.pontoC.y] == 0 &&
+                            board[pt.pontoD.x + 1][pt.pontoD.y] == 0
+                        ) {
+                            pt.moverBaixo()
+                        }
+
+                    } else {
+
+                        atualizarPeca()
+
+                    }
+
+
+                    try {
+                        ConstruirPeca()
 
                     } catch (e: ArrayIndexOutOfBoundsException) {
                         //se a peça passou das bordas eu vou parar o jogo
                         //running = false
                         println(e.message)
-                    }
+                    }*/
                 }
             }
         }.start()
@@ -138,33 +192,65 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun pecasVariadas() {
+    fun pecasVariadas(): Piece {
 
         var todasPecas = Random.nextInt(0, 6)
 
-        when (todasPecas) {
+        return when (todasPecas) {
             0 -> {
-                pt = L(3, 15)
+                return L(3, 15)
             }
             1 -> {
-                pt = I(3, 15)
+                return I(3, 15)
             }
             2 -> {
-                pt = J(3, 15)
+                return J(3, 15)
             }
             3 -> {
-                pt = N(3, 15)
+                return N(3, 15)
             }
             4 -> {
-                pt = O(3, 15)
+                return O(3, 15)
             }
             5 -> {
-                pt = S(3, 15)
+                return S(3, 15)
             }
             else -> {
-                pt = T(3, 15)
+                return T(3, 15)
             }
         }
+    }
+
+    fun colisaoFundo(): Boolean {
+        return ((pt.pontoA.x + 1 < LINHA && board[pt.pontoA.x + 1][pt.pontoA.y] < 1) &&
+                (pt.pontoB.x + 1 < LINHA && board[pt.pontoB.x + 1][pt.pontoB.y] < 1) &&
+                (pt.pontoC.x + 1 < LINHA && board[pt.pontoB.x + 1][pt.pontoC.y] < 1) &&
+                (pt.pontoD.x + 1 < LINHA && board[pt.pontoD.x + 1][pt.pontoD.y] < 1))
+    }
+
+    fun colisaoDireita(): Boolean {
+        return ((pt.pontoA.y < LINHA && board[pt.pontoA.x][pt.pontoA.y + 1] < 1) &&
+                (pt.pontoB.y < LINHA && board[pt.pontoB.x][pt.pontoB.y + 1] < 1) &&
+                (pt.pontoC.y < LINHA && board[pt.pontoB.x][pt.pontoC.y + 1] < 1) &&
+                (pt.pontoD.y < LINHA && board[pt.pontoD.x][pt.pontoD.y] < 1))
+
+    }
+
+    fun colisaoEsquerda(): Boolean {
+        return ((pt.pontoA.y - 1 >= 0 && board[pt.pontoA.x][pt.pontoA.y - 1] < 1) &&
+                (pt.pontoB.y - 1 >= 0 && board[pt.pontoB.x][pt.pontoB.y - 1] < 1) &&
+                (pt.pontoC.y - 1 >= 0 && board[pt.pontoB.x][pt.pontoC.y - 1] < 1) &&
+                (pt.pontoD.y - 1 >= 0 && board[pt.pontoD.x][pt.pontoD.y - 1] < 1))
+
+    }
+
+    fun destruir(linha: Int) {
+        board[linha] = Array(COLUNA) { 0 }
+        for (i in linha downTo 1) {
+            board[i] = board[i - 1]
+        }
+        pontos += COLUNA
+        //txtPoints.text = "Pontos: $pontos"
     }
 
 
