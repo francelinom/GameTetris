@@ -9,4 +9,7 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="salvar">Salvar</string>
+    <string name="game_over">Game Over</string>
+    <string name="pontua_o">Pontuação:</string>
+    <string name="tetris">Tetris</string>
 </resources>
