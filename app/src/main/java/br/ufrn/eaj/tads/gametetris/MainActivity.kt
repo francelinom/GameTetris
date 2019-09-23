@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     var pt: Piece = pecasVariadas() //T(3, 15)
 
+
     var board = Array(LINHA) {
         Array(COLUNA) { 0 }
     }
@@ -59,7 +60,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonGirar.setOnClickListener {
+            if (colisaoEsquerda() && colisaoDireita()){
                 pt.girar()
+            }
+           // pt.girar()
         }
 
         buttonDescer.setOnClickListener {
@@ -229,10 +233,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun colisaoDireita(): Boolean {
-        return ((pt.pontoA.y < LINHA && board[pt.pontoA.x][pt.pontoA.y + 1] < 1) &&
-                (pt.pontoB.y < LINHA && board[pt.pontoB.x][pt.pontoB.y + 1] < 1) &&
-                (pt.pontoC.y < LINHA && board[pt.pontoB.x][pt.pontoC.y + 1] < 1) &&
-                (pt.pontoD.y < LINHA && board[pt.pontoD.x][pt.pontoD.y] < 1))
+        return ((pt.pontoA.y + 1 < COLUNA && board[pt.pontoA.x][pt.pontoA.y + 1] < 1) &&
+                (pt.pontoB.y + 1 < COLUNA && board[pt.pontoB.x][pt.pontoB.y + 1] < 1) &&
+                (pt.pontoC.y + 1 < COLUNA && board[pt.pontoB.x][pt.pontoC.y + 1] < 1) &&
+                (pt.pontoD.y + 1 < COLUNA && board[pt.pontoD.x][pt.pontoD.y] < 1))
 
     }
 
