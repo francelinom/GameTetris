@@ -273,5 +273,16 @@ class MainActivity : AppCompatActivity() {
         textResult.text = "$pontos" //(vai receber os pontos das destruições)
     }
 
+    override fun onPause(){
+        super.onPause()
+        running = false
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        running = true
+        gameRun()
+    }
+
 
 }

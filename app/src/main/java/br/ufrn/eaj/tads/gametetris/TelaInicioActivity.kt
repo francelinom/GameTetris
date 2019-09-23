@@ -3,6 +3,7 @@ package br.ufrn.eaj.tads.gametetris
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import kotlinx.android.synthetic.main.activity_tela_inicio.*
 
 class TelaInicioActivity : AppCompatActivity() {
@@ -20,6 +21,8 @@ class TelaInicioActivity : AppCompatActivity() {
             var i = Intent(this, ConfigurarActivity::class.java)
             startActivity(i)
         }
+
+        buttonContinuar.visibility = View.VISIBLE
 
 
     }
