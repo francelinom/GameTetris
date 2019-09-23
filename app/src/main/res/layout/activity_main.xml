@@ -9,6 +9,35 @@
     tools:context=".MainActivity">
 
 
+    <LinearLayout
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pontos" />
+
+        <TextView
+            android:id="@+id/textResult"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text=" " />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pr_xima" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="----"/>
+
+    </LinearLayout>
+
+
     <GridLayout
         android:id="@+id/gridboard"
         android:layout_width="wrap_content"
@@ -47,6 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
+
         <Button
             android:id="@+id/buttonDescer"
             android:layout_width="wrap_content"

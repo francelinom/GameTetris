@@ -146,7 +146,7 @@ class MainActivity : AppCompatActivity() {
                                 break
                             else {
                                 cont++
-                                if (cont === 50) {
+                                if (cont === 20) {
                                     destruir(i)
                                 }
                             }
@@ -270,7 +270,7 @@ class MainActivity : AppCompatActivity() {
             vm.board[i] = vm.board[i - 1]
         }
         pontos += COLUNA
-        //txtPoints.text = "Pontos: $pontos" (vai receber os pontos das destruições)
+        textResult.text = "$pontos" //(vai receber os pontos das destruições)
     }
 
 

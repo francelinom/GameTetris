@@ -13,7 +13,7 @@
         android:id="@+id/textViewNivel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:text="@string/selecione_o_nivel_do_jogo"
        android:layout_gravity="center"/>
 
@@ -21,6 +21,7 @@
         android:id="@+id/radioGroupModoFND"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:orientation="vertical" >
 
         <RadioButton
@@ -43,39 +44,6 @@
             android:text="Difícil" />
     </RadioGroup>
 
-    <TextView
-        android:id="@+id/textViewNumeroPecas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:text="@string/escolha_o_numeros_de_pecas" />
-
-    <RadioGroup
-        android:id="@+id/radioGroupQuantidadePecas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <RadioButton
-            android:id="@+id/radioButtonCinco"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/_5" />
-
-        <RadioButton
-            android:id="@+id/radioButtonSeis"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/_6" />
-
-        <RadioButton
-            android:id="@+id/radioButtonSete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/_7" />
-    </RadioGroup>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -90,7 +58,6 @@
             android:layout_gravity="center" />
 
     </LinearLayout>
-
 
 
 </LinearLayout>
