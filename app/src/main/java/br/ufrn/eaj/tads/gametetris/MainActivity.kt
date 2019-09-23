@@ -5,12 +5,27 @@ import android.os.Bundle
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import android.view.LayoutInflater
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProviders
 import br.ufrn.eaj.tads.gametetris.letras.*
 import kotlin.random.Random
 import kotlin.random.nextInt
 
 
 class MainActivity : AppCompatActivity() {
+
+    open class Viewmodel : ViewModel(){
+        val LINHA = 36
+        val COLUNA = 26
+
+        var board = Array(LINHA) {
+            Array(COLUNA) { 0 }
+        }
+    }
+
+    val vm : Viewmodel by lazy {
+        ViewModelProviders.of(this)[Viewmodel::class.java]
+    }
 
     val LINHA = 36
     val COLUNA = 26
@@ -21,9 +36,9 @@ class MainActivity : AppCompatActivity() {
     var pt: Piece = pecasVariadas() //T(3, 15)
 
 
-    var board = Array(LINHA) {
+   /* var board = Array(LINHA) {
         Array(COLUNA) { 0 }
-    }
+    }*/
 
     var boardView = Array(LINHA) {
         arrayOfNulls<ImageView>(COLUNA)
@@ -63,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             if (colisaoEsquerda() && colisaoDireita()){
                 pt.girar()
             }
-           // pt.girar()
+           // pt.girar()  ESSA PARTE FOI PARA DENTRO DO IF
         }
 
         buttonDescer.setOnClickListener {
@@ -95,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                     for (i in 0 until LINHA) {
                         for (j in 0 until COLUNA) {
 
-                            when (board[i][j]) {
+                            when (vm.board[i][j]) {
                                 0 -> {
                                     boardView[i][j]!!.setImageResource(R.drawable.black)
                                 }
@@ -103,7 +118,8 @@ class MainActivity : AppCompatActivity() {
                                     boardView[i][j]!!.setImageResource(R.drawable.white)
                                 }
                             }
-                            /*if (board[i][j] == 0) {
+                            /*
+                            if (board[i][j] == 0) {
                                 boardView[i][j]!!.setImageResource(R.drawable.black)
                             }*/
                         }
@@ -116,21 +132,21 @@ class MainActivity : AppCompatActivity() {
                         ConstruirPeca()
                     } else {
                         ConstruirPeca()
-                        board[pt.pontoA.x][pt.pontoA.y] = 1
-                        board[pt.pontoB.x][pt.pontoB.y] = 1
-                        board[pt.pontoC.x][pt.pontoC.y] = 1
-                        board[pt.pontoD.x][pt.pontoD.y] = 1
+                        vm.board[pt.pontoA.x][pt.pontoA.y] = 1
+                        vm.board[pt.pontoB.x][pt.pontoB.y] = 1
+                        vm.board[pt.pontoC.x][pt.pontoC.y] = 1
+                        vm.board[pt.pontoD.x][pt.pontoD.y] = 1
                         pt = pecasVariadas()
                     }
 
                     for (i in 0 until LINHA) {
                         var cont = 0
                         for (j in 0 until COLUNA) {
-                            if (board[i][j] == 0)
+                            if (vm.board[i][j] == 0)
                                 break
                             else {
                                 cont++
-                                if (cont === 20) {
+                                if (cont === 50) {
                                     destruir(i)
                                 }
                             }
@@ -172,10 +188,10 @@ class MainActivity : AppCompatActivity() {
 
 
     fun atualizarPeca() {
-        board[pt.pontoA.x - 1][pt.pontoA.y] = 1
-        board[pt.pontoB.x - 1][pt.pontoB.y] = 1
-        board[pt.pontoC.x - 1][pt.pontoC.y] = 1
-        board[pt.pontoD.x - 1][pt.pontoD.y] = 1
+        vm.board[pt.pontoA.x - 1][pt.pontoA.y] = 1
+        vm.board[pt.pontoB.x - 1][pt.pontoB.y] = 1
+        vm.board[pt.pontoC.x - 1][pt.pontoC.y] = 1
+        vm.board[pt.pontoD.x - 1][pt.pontoD.y] = 1
 
         novaPeca()
         ConstruirPeca()
@@ -226,35 +242,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun colisaoFundo(): Boolean {
-        return ((pt.pontoA.x + 1 < LINHA && board[pt.pontoA.x + 1][pt.pontoA.y] < 1) &&
-                (pt.pontoB.x + 1 < LINHA && board[pt.pontoB.x + 1][pt.pontoB.y] < 1) &&
-                (pt.pontoC.x + 1 < LINHA && board[pt.pontoB.x + 1][pt.pontoC.y] < 1) &&
-                (pt.pontoD.x + 1 < LINHA && board[pt.pontoD.x + 1][pt.pontoD.y] < 1))
+        return ((pt.pontoA.x + 1 < LINHA && vm.board[pt.pontoA.x + 1][pt.pontoA.y] < 1) &&
+                (pt.pontoB.x + 1 < LINHA && vm.board[pt.pontoB.x + 1][pt.pontoB.y] < 1) &&
+                (pt.pontoC.x + 1 < LINHA && vm.board[pt.pontoB.x + 1][pt.pontoC.y] < 1) &&
+                (pt.pontoD.x + 1 < LINHA && vm.board[pt.pontoD.x + 1][pt.pontoD.y] < 1))
     }
 
     fun colisaoDireita(): Boolean {
-        return ((pt.pontoA.y + 1 < COLUNA && board[pt.pontoA.x][pt.pontoA.y + 1] < 1) &&
-                (pt.pontoB.y + 1 < COLUNA && board[pt.pontoB.x][pt.pontoB.y + 1] < 1) &&
-                (pt.pontoC.y + 1 < COLUNA && board[pt.pontoB.x][pt.pontoC.y + 1] < 1) &&
-                (pt.pontoD.y + 1 < COLUNA && board[pt.pontoD.x][pt.pontoD.y] < 1))
+        return ((pt.pontoA.y + 1 < COLUNA && vm.board[pt.pontoA.x][pt.pontoA.y + 1] < 1) &&
+                (pt.pontoB.y + 1 < COLUNA && vm.board[pt.pontoB.x][pt.pontoB.y + 1] < 1) &&
+                (pt.pontoC.y + 1 < COLUNA && vm.board[pt.pontoB.x][pt.pontoC.y + 1] < 1) &&
+                (pt.pontoD.y + 1 < COLUNA && vm.board[pt.pontoD.x][pt.pontoD.y] < 1))
 
     }
 
     fun colisaoEsquerda(): Boolean {
-        return ((pt.pontoA.y - 1 >= 0 && board[pt.pontoA.x][pt.pontoA.y - 1] < 1) &&
-                (pt.pontoB.y - 1 >= 0 && board[pt.pontoB.x][pt.pontoB.y - 1] < 1) &&
-                (pt.pontoC.y - 1 >= 0 && board[pt.pontoB.x][pt.pontoC.y - 1] < 1) &&
-                (pt.pontoD.y - 1 >= 0 && board[pt.pontoD.x][pt.pontoD.y - 1] < 1))
+        return ((pt.pontoA.y - 1 >= 0 && vm.board[pt.pontoA.x][pt.pontoA.y - 1] < 1) &&
+                (pt.pontoB.y - 1 >= 0 && vm.board[pt.pontoB.x][pt.pontoB.y - 1] < 1) &&
+                (pt.pontoC.y - 1 >= 0 && vm.board[pt.pontoB.x][pt.pontoC.y - 1] < 1) &&
+                (pt.pontoD.y - 1 >= 0 && vm.board[pt.pontoD.x][pt.pontoD.y - 1] < 1))
 
     }
 
     fun destruir(linha: Int) {
-        board[linha] = Array(COLUNA) { 0 }
+        vm.board[linha] = Array(COLUNA) { 0 }
         for (i in linha downTo 1) {
-            board[i] = board[i - 1]
+            vm.board[i] = vm.board[i - 1]
         }
         pontos += COLUNA
-        //txtPoints.text = "Pontos: $pontos"
+        //txtPoints.text = "Pontos: $pontos" (vai receber os pontos das destruições)
     }
 
 
