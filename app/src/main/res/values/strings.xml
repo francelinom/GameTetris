@@ -4,14 +4,21 @@
     <string name="continuar">Continuar</string>
     <string name="selecione_o_nivel_do_jogo">Selecione o Nivel do Jogo</string>
     <string name="escolha_o_numeros_de_pecas">Escolha o Numeros de Pecas</string>
-    <string name="_6">6</string>
-    <string name="_7">7</string>
+    <string name="_6" translatable="false">6</string>
+    <string name="_7" translatable="false">7</string>
     <string name="salvar">Salvar</string>
     <string name="game_over">Game Over</string>
     <string name="pontua_o">Pontuação:</string>
     <string name="tetris">Tetris</string>
     <string name="pr_xima">Próxima:</string>
     <string name="pontos">Pontos</string>
-    <string name="_5">5</string>
+    <string name="_5" translatable="false">5</string>
     <string name="configurar">configurar</string>
+    <string name="esquerda">Esquerda</string>
+    <string name="direita">Direita</string>
+    <string name="girar">Girar</string>
+    <string name="descer">Descer</string>
+    <string name="record">Record:</string>
+    <string name="novo_record">Novo Record</string>
+    <string name="sair">Sair</string>
 </resources>

@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">GameTetris</string>
+    <string name="configurar">to set up</string>
+    <string name="continuar">continue</string>
+    <string name="escolha_o_numeros_de_pecas">Choose Part Numbers</string>
+    <string name="game_over">game over</string>
+    <string name="tetris">Tetris</string>
+    <string name="selecione_o_nivel_do_jogo">select game level</string>
+    <string name="salvar">"to save "</string>
+    <string name="pr_xima">next</string>
+    <string name="pontua_o">punctuation</string>
+    <string name="pontos">points</string>
+    <string name="novo_jogo">"new game "</string>
+    <string name="sair">exit</string>
+    <string name="record">record</string>
+    <string name="novo_record">new record</string>
+    <string name="girar">to spin</string>
+    <string name="esquerda">left</string>
+    <string name="direita">right</string>
+    <string name="descer">go down</string>
 </resources>

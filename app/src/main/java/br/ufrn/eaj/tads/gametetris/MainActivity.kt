@@ -1,5 +1,6 @@
 package br.ufrn.eaj.tads.gametetris
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -13,6 +14,8 @@ import kotlin.random.nextInt
 
 
 class MainActivity : AppCompatActivity() {
+
+    val PREFS = "prefs_file"
 
     open class Viewmodel : ViewModel(){
         val LINHA = 36
@@ -50,6 +53,9 @@ class MainActivity : AppCompatActivity() {
 
         gridboard.rowCount = LINHA
         gridboard.columnCount = COLUNA
+
+        val salvar = getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+        speed = salvar.getLong("speed", 300)
 
         val inflater = LayoutInflater.from(this)
 
@@ -146,7 +152,7 @@ class MainActivity : AppCompatActivity() {
                                 break
                             else {
                                 cont++
-                                if (cont === 20) {
+                                if (cont == COLUNA) {
                                     destruir(i)
                                 }
                             }
@@ -269,7 +275,7 @@ class MainActivity : AppCompatActivity() {
         for (i in linha downTo 1) {
             vm.board[i] = vm.board[i - 1]
         }
-        pontos += COLUNA
+        pontos += 50
         textResult.text = "$pontos" //(vai receber os pontos das destruições)
     }
 

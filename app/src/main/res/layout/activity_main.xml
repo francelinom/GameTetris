@@ -15,7 +15,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:text="@string/pontos" />
 
@@ -53,14 +53,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Esquerda" />
+            android:text="@string/esquerda" />
 
         <Button
             android:id="@+id/buttonDireita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Direita" />
+            android:text="@string/direita" />
 
 
         <Button
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Girar" />
+            android:text="@string/girar" />
 
     </LinearLayout>
 
@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:text="Descer" />
+            android:text="@string/descer" />
 
     </LinearLayout>
 
