@@ -1,6 +1,7 @@
 package br.ufrn.eaj.tads.gametetris
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     val PREFS = "prefs_file"
 
-    open class Viewmodel : ViewModel(){
+    open class Viewmodel : ViewModel() {
         val LINHA = 36
         val COLUNA = 26
 
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    val vm : Viewmodel by lazy {
+    val vm: Viewmodel by lazy {
         ViewModelProviders.of(this)[Viewmodel::class.java]
     }
 
@@ -39,9 +40,9 @@ class MainActivity : AppCompatActivity() {
     var pt: Piece = pecasVariadas() //T(3, 15)
 
 
-   /* var board = Array(LINHA) {
-        Array(COLUNA) { 0 }
-    }*/
+    /* var board = Array(LINHA) {
+         Array(COLUNA) { 0 }
+     }*/
 
     var boardView = Array(LINHA) {
         arrayOfNulls<ImageView>(COLUNA)
@@ -81,10 +82,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonGirar.setOnClickListener {
-            if (colisaoEsquerda() && colisaoDireita()){
+            if (colisaoEsquerda() && colisaoDireita()) {
                 pt.girar()
             }
-           // pt.girar()  ESSA PARTE FOI PARA DENTRO DO IF
+            // pt.girar()  ESSA PARTE FOI PARA DENTRO DO IF
         }
 
         buttonDescer.setOnClickListener {
@@ -157,6 +158,13 @@ class MainActivity : AppCompatActivity() {
                                 }
                             }
 
+                        }
+                    }
+
+                    for (i in 0 until COLUNA) {
+                        if (vm.board[0][i] == 1) {
+                            telaGameOver()
+                            break
                         }
                     }
 
@@ -279,7 +287,7 @@ class MainActivity : AppCompatActivity() {
         textResult.text = "$pontos" //(vai receber os pontos das destruições)
     }
 
-    override fun onPause(){
+    override fun onPause() {
         super.onPause()
         running = false
     }
@@ -288,6 +296,13 @@ class MainActivity : AppCompatActivity() {
         super.onRestart()
         running = true
         gameRun()
+    }
+
+
+    fun telaGameOver() {
+        var i = Intent(this, GameOverActivity::class.java)
+        startActivity(i)
+        finish()
     }
 
 
