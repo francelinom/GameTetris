@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="  " />
+            android:text="0" />
     </LinearLayout>
 
     <LinearLayout
@@ -54,11 +54,11 @@
             android:text="@string/record" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/textViewRecordAtual"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="  " />
+            android:text="0" />
 
     </LinearLayout>
 
@@ -73,14 +73,16 @@
         android:id="@+id/textViewNovoR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/novo_record" />
+        android:text="@string/novo_record"
+        android:visibility="gone"
+        />
 
     <TextView
         android:id="@+id/textViewNovoRecord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="  " />
+        android:text="" />
 
     </LinearLayout>
 

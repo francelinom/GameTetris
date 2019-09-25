@@ -160,47 +160,24 @@ class MainActivity : AppCompatActivity() {
 
                         }
                     }
-
-                    for (i in 0 until COLUNA) {
-                        if (vm.board[0][i] == 1) {
-                            telaGameOver()
-                            break
+                    //GAMEOVER toca na borda de cima
+                    if(running) {
+                        for (i in 0 until COLUNA) {
+                            if (vm.board[3][i] == 1) {
+                                telaGameOver()
+                                break
+                                running = false
+                                finish()
+                            }
                         }
                     }
 
-                    /*
-
-
-                    if (pt.pontoA.x <= LINHA && pt.pontoB.x + 0 <= LINHA && pt.pontoC.x <= LINHA && pt.pontoD.x <= LINHA) {
-                        if (board[pt.pontoA.x + 1][pt.pontoA.y] == 0 &&
-                            board[pt.pontoB.x + 1][pt.pontoB.y] == 0 &&
-                            board[pt.pontoC.x + 1][pt.pontoC.y] == 0 &&
-                            board[pt.pontoD.x + 1][pt.pontoD.y] == 0
-                        ) {
-                            pt.moverBaixo()
-                        }
-
-                    } else {
-
-                        atualizarPeca()
-
-                    }
-
-
-                    try {
-                        ConstruirPeca()
-
-                    } catch (e: ArrayIndexOutOfBoundsException) {
-                        //se a peça passou das bordas eu vou parar o jogo
-                        //running = false
-                        println(e.message)
-                    }*/
                 }
             }
         }.start()
     }
 
-
+/*
     fun atualizarPeca() {
         vm.board[pt.pontoA.x - 1][pt.pontoA.y] = 1
         vm.board[pt.pontoB.x - 1][pt.pontoB.y] = 1
@@ -212,6 +189,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun novaPeca() {
+        pt = T(3, 15)
+
+    }
+
+    */
+
     fun ConstruirPeca() {
 
         boardView[pt.pontoA.x][pt.pontoA.y]!!.setImageResource(R.drawable.white)
@@ -221,14 +205,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun novaPeca() {
-        pt = T(3, 15)
 
-    }
 
     fun pecasVariadas(): Piece {
 
         var todasPecas = Random.nextInt(0, 6)
+
+       // todasPecas = 1/////////////////
 
         return when (todasPecas) {
             0 -> {
@@ -301,9 +284,18 @@ class MainActivity : AppCompatActivity() {
 
     fun telaGameOver() {
         var i = Intent(this, GameOverActivity::class.java)
+
+        var pontuacaoAtual : String = textResult.text.toString()
+
+        var b = Bundle()
+        b.putString("pontuacaoAtual", pontuacaoAtual)
+
+        i.putExtras(b)
+
         startActivity(i)
         finish()
     }
+
 
 
 }
